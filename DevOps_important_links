@@ -1,0 +1,292 @@
+********************************** DOCKER/JENKINS/ANSIBLE **************************************************
+
+1) CICD DevOPS project With Github,Dockerhub,Docker Host,Jenkins and Ansible | WhatsAPP No- 8817442344
+https://www.youtube.com/watch?v=vHzOq7n6gjo
+
+STEPS:
+=====
+1) Create a role -> EC2 full access + Route53 full access + IAM full access + s3 full access
+2) AWS cli need to be configured. In case of AMAZON EC2 linux machine it is already installed. check with command 'aws configure'
+3) KOPS installation in AWS
+4) create cluster
+5) install jenkins in different system
+6) passwd root
+7) vim /etc/ssh/sshd_config
+PermitRootLogin yes
+PasswordAuthentication yes
+8) systemctl restart sshd
+9) same for ansible server 
+10) ssh-keygen      ansible server
+11) cd .ssh/
+12) vim id_rsa.pub
+copy this to controller machine 
+13) controller machine (where from kubernetes cluster got created)
+cd .ssh/
+vim authorized_keys
+copy the key
+14) use below command from ansible server
+ssh root@172.31.35.202
+15) Ansible server -> yum install docker
+16) docker login
+17) cd /opt
+18) ansible.yml
+19) yum install ansible
+20) vim /etc/ansible/hosts
+21) github _ jenkin using webhook
+22) git package should be installed in jenkin server.
+23) Job should be same name with image name
+24)(Jenkins)  SEND FILE AND EXECUTE COMMAND OVER SSH
+Exec command: rsync -avh /var/lib/jenkins/workspace/<projectname>/*  root@ipofansibleserver:/opt
+25) (Ansible) SEND FILE AND EXECUTE COMMAND OVER SSH
+Exec command: 
+cd /opt
+docker image build -t $JOB_NAME:v1.$BUILD_ID .
+docker image tag $JOB_NAME:v1.$BUILD_ID sd171991/$JOB_NAME:v1.$BUILD_ID
+docker image tag $JOB_NAME:v1.$BUILD_ID sd171991/$JOB_NAME:latest
+docker image push sd171991/$JOB_NAME:v1.$BUILD_ID
+docker image push $JOB_NAME:latest
+docker image rmi $JOB_NAME:v1.$BUILD_ID sd171991/$JOB_NAME:v1.$BUILD_ID sd171991/$JOB_NAME:latest
+26) (Ansible) SEND FILE AND EXECUTE COMMAND OVER SSH
+Exec command: ansible-playbook /opt/ansible.yml
+
+**************************************** AZURE DEVOPS ************************************************
+1) How to deploy Java application on Azure App service | Azure DevOps for creating CI/CD #GetSetAzure
+https://www.youtube.com/watch?v=ZOlJ8bXxVIg
+
+Run Selenium Test on MS Azure Pipeline || Azure Cloud
+https://www.youtube.com/watch?v=5S7ev-GMyOM
+
+Azure DevSecOps | Integrate Sonarqube with Azure Pipeline to run Static Code Analysis
+https://www.youtube.com/watch?v=ApMeWoRkv-A
+
+VM coomnd prompt to access sonarqube: netsh advfirewall firewall add rule name=Sonar dir=in action=allow protocol=TCP localport=9000
+
+Fortify on Demand - Azure DevOps Features and Functionality
+https://www.youtube.com/watch?v=C1MOHwL4Ov0
+
+2) How to Create a CI/CD Pipeline in Azure DevOps | Azure DevOps Tutorial | CI/CD Full Course
+https://www.youtube.com/watch?v=xH5EY7FCFQw
+
+3) ASP.NET Web application deployment on Azure Kubernetes Services through Azure DevOps CI/CD | AKS
+https://www.youtube.com/watch?v=HmajgZEyYa8&t=14s
+
+How to create AKS Cluster | Setting Up & Deploying an Azure Kubernetes Service Cluster | K21Academy
+https://www.youtube.com/watch?v=NnwQZyi0BAs
+
+4) How to Deploy your Angular application in Azure DevOps
+https://www.youtube.com/watch?v=GhPi3xBhzrI&t=676s
+
+5) CI/CD for Node JS application using Azure DevOps  =====need more attention====
+https://www.youtube.com/watch?v=Qp95McA2zSQ&t=340s
+
+Node
+====
+npm install express-generator -g
+
+6) Deploying React apps to Azure Web App with Azure DevOps
+https://www.youtube.com/watch?v=Ny5vJRfQito
+
+7) Azure Devops for Azure Functions | CI-CD Pipelines
+https://www.youtube.com/watch?v=fW4sxHfADEA
+
+8) Hosting Python package in Azure DevOps Guide. Setup/Build/Deploy/Install
+https://www.youtube.com/watch?v=P1FC6XVcsew
+
+9) How to create new webapp using php in azure devops
+https://www.youtube.com/watch?v=RMjU3llv8Yg
+
+10) Complete series of Azure SQL database deployment using Azure DevOps CI/CD pipeline
+https://www.youtube.com/watch?v=IijBgEGibF4
+
+11) DEVOPS MELA - ASP.NET
+https://www.youtube.com/watch?v=KceoqTcf4Lk&list=PLNNeqe21-U0PJGMvVuG8XKEZSrr8aJiz7
+
+************************************ AZURE DEVOPS & ARM TEMPLATE ****************************************
+
+1) Using ARM TEMPLATES In AZURE DEVOPS PIPELINE To Automatically CREATE INFRASTRUCTURE As CODE
+https://www.youtube.com/watch?v=ZsUxn7fpzYQ&list=PLNNeqe21-U0PJGMvVuG8XKEZSrr8aJiz7&index=6
+https://www.youtube.com/watch?v=3IRwtbGlshk
+
+
+***************************************** DOCKER & CONTAINERS *******************************************
+
+1) Dockerize your Angular app - Docker /Angular 13 / Nginx
+https://www.youtube.com/watch?v=3NobJzI3_68
+
+2) Dockerizing a React application with Nodejs Postgres and NginX | dev and prod | step by step
+https://www.youtube.com/watch?v=-pTel5FojAQ
+
+3) Docker (Part 3) : CI/CD pipeline for Docker Container | Azure DevOps for Docker Containers
+https://www.youtube.com/watch?v=9IzrbjrW6sQ
+
+====================
+Docker asp.net STEPS
+====================
+ASP.NET Core web application deployment on a Docker Container 
+Steps:-
+- ASP.NET Core web application creation locally
+- Creation of Ubuntu Server on Azure Cloud
+- Docker container set-up on Ubuntu Server
+- Docker File creation and walk-through 
+- Docker Image and Container Creation 
+- Testing the Running the web application on Docker Container 
+
+DOCKERFILE:-
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+WORKDIR /app
+COPY . . 
+ENV ASPNETCORE_URLS http://*:5000
+
+EXPOSE 5000
+ENTRYPOINT ["dotnet", "demoproj.dll"]
+
+DOCKER SET-UP Commands:-
+sudo apt update
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubu...
+ | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu
+ bionic stable"
+sudo apt update
+sudo apt install docker-ce
+
+DOCKER COMMANDS:-
+sudo docker build -t dotnetapp .
+sudo docker run -d -p 5000:5000 dotnetapp
+
+Follow us @devopsmela on Instagram
+Write us devopsmela@gmail.com
+
+=================
+ACR asp.net STEPS
+=================
+List of steps followed in the above tutorial:
+- Azure Container Registry creation 
+- Azure CLI set-up on Ubuntu Server 
+- Pushing ASP.NET Core Web App on Azure Registry
+
+Azure CLI Commands:-
+https://gitlab.com/rohit.kumar.singh0...
+
+Azure Login:-
+sudo az login
+sudo az acr login --name devopsmela
+
+Push Commands:-
+sudo docker tag dotnetapp devopsmela.azurecr.io/dotnetapp
+sudo docker push devopsmela.azurecr.io/dotnetapp
+
+Follow @devopsmela on Instagram for daily updates 
+Write us at devopsmela@gmail.com
+
+==================
+ACI asp.net STEPS:
+==================
+ASP.NET Core Web Application Deployment on Azure Container Instance 
+-  Fetching ASP.NET Image from Azure Container Registry
+- Deploying and Testing the Web Application 
+
+VVC:\Users\lvchi\source\repos\PC_FIRST\PC_FIRST.sln
+
+
+********************************************** KUBERNETES ***********************************************
+
+1) Kubernetes Multi Container Deployment | React | Node.js | Postgres | Ingress Nginx | step by step
+https://www.youtube.com/watch?v=OVVGwc90guo
+
+
+
+********************************************** POWERSHELL **************************************************
+
+1) PowerShell Execution policy
+https://www.youtube.com/watch?v=FZRX3qDYNfI
+
+********************************************** AUTOMATION **************************************************
+
+1) Azure Automation Runbook - In Hindi
+https://www.youtube.com/watch?v=gfEfPsgoSWs
+
+2) Azure Automation Part1 - Working with PowerShell Runbooks to Automate Virtual Machine Creation
+https://www.youtube.com/watch?v=YU4pby_kKME
+
+https://www.varonis.com/blog/azure-automation
+
+3) Azure automation - > Using azure monitor execute Automation runbook.
+https://tcsglobal.udemy.com/course/az-102-azure-administrator-certification-transition/learn/lecture/25360884#overview
+
+4) Automate Everything (Building Real-World Cloud Apps with Azure)
+https://docs.microsoft.com/en-us/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/automate-everything
+
+********************************************** TERRAFORM **************************************************
+
+1) Deploy Azure Kubernetes Service(AKS) Cluster using Terraform and Azure DevOps YAML Pipeline
+https://www.youtube.com/watch?v=o_sQvOHWIcU
+
+******************************************* JFROG ARTIFACTORY *********************************************
+
+1) Jfrog | Jfrog Artifactory | Jfrog Artifactory Tutorial | Artifactory Tutorial | Intellipaat
+https://www.youtube.com/watch?v=a1B1jXXVzPQ
+
+2) Artifactory vs Nexus vs ProGet
+https://www.eficode.com/blog/artifactory-nexus-proget
+
+3) Upload Artifact to Nexus using Jenkins Pipeline | Jenkins Nexus Artifact Uploader Example|Jenkins CI
+https://www.youtube.com/watch?v=ftTjxztcT14
+
+4) Azure DevOps - Upload Docker image to JFrog Artifactory
+https://www.youtube.com/watch?v=iVYK9qXCH5g
+
+Azure DevOps - JFrog Artifactory Service Connection
+https://www.youtube.com/watch?v=mljlJ05whEA
+
+JFrog Artifactory Hands On:
+===========================
+a) Run JFrog Artifactory and setup the admin
+b) Use Git to get the sample code
+c) Install Maven to compile and package the sample code
+d) Connect Maven to JForg
+e) Check how the versioning works in JFrog
+
+LINUX:
+netstat -ant|grep 8081
+
+[root@pc-centos-jfrog chiney]# firewall-cmd --add-port=8081/tcp
+FirewallD is not running
+[root@pc-centos-jfrog chiney]# systemctl start firewalld
+[root@pc-centos-jfrog chiney]# firewall-cmd --add-port=8081/tcp
+success
+
+yum install maven -y
+mvn -version
+mvn compile
+mvn package
+
+[root@pc-centos-jfrog PetClinic]# cd /root
+[root@pc-centos-jfrog ~]# pwd
+/root
+[root@pc-centos-jfrog ~]# ls -a
+.  ..  anaconda-ks.cfg  .bash_logout  .bash_profile  .bashrc  .cache  .config  .cshrc  .m2  original-ks.cfg  .pki  .ssh  .tcshrc
+
+export PATH=$PATH:/opt/apache-maven-3.6.2/bin
+
+******************************************** Azure Artifacts ***********************************************
+
+1) Complete end to end package management solution with Azure Artifacts | ASP.NET | Build Integration
+https://www.youtube.com/watch?v=PBGdROT2Hnc&t=25s
+
+2) Using Azure DevOps Artifacts with Java/Maven Projects
+https://www.youtube.com/watch?v=8iyockDkIY4V
+
+*********************************************** THEORIES ***************************************************
+
+1) NET Framework is a platform for . NET applications on Windows whereas, NET Core is the latest version of the 
+. NET Framework which is a cross-platform and open-source framework optimized for modern app needs and developer workflows.
+
+2) Terraform is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
+
+Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. This state is stored by default in a local file named "terraform.
+
+****************************************** NEXT **************************************************
+
+1) Planning and implementing Disaster Recovery solutions, capacity planning, data archiving, backup/recovery strategies, Performance Analysis and optimization.
+2) scenario based interview questions?
