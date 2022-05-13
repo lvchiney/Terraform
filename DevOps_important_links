@@ -53,25 +53,25 @@ Exec command: ansible-playbook /opt/ansible.yml
 1) How to deploy Java application on Azure App service | Azure DevOps for creating CI/CD #GetSetAzure
 https://www.youtube.com/watch?v=ZOlJ8bXxVIg
 
+@@Startup command: java -jar /home/site/wwwroot/Wallet-0.0.1-SNAPSHOT.jar
+Run the application using <web-app-url>/swagger-ui.html
+
 Run Selenium Test on MS Azure Pipeline || Azure Cloud
 https://www.youtube.com/watch?v=5S7ev-GMyOM
 
 Azure DevSecOps | Integrate Sonarqube with Azure Pipeline to run Static Code Analysis
 https://www.youtube.com/watch?v=ApMeWoRkv-A
 
-VM coomnd prompt to access sonarqube: netsh advfirewall firewall add rule name=Sonar dir=in action=allow protocol=TCP localport=9000
+VM command prompt to access sonarqube: netsh advfirewall firewall add rule name=Sonar dir=in action=allow protocol=TCP localport=9000
 
 Fortify on Demand - Azure DevOps Features and Functionality
 https://www.youtube.com/watch?v=C1MOHwL4Ov0
 
+CICD pipeline for Java application to deploy on kubernetes cluster using Jenkins | Devops Project => ADVANCED
+https://www.youtube.com/watch?v=adG0vq5boL8
+
 2) How to Create a CI/CD Pipeline in Azure DevOps | Azure DevOps Tutorial | CI/CD Full Course
 https://www.youtube.com/watch?v=xH5EY7FCFQw
-
-3) ASP.NET Web application deployment on Azure Kubernetes Services through Azure DevOps CI/CD | AKS
-https://www.youtube.com/watch?v=HmajgZEyYa8&t=14s
-
-How to create AKS Cluster | Setting Up & Deploying an Azure Kubernetes Service Cluster | K21Academy
-https://www.youtube.com/watch?v=NnwQZyi0BAs
 
 4) How to Deploy your Angular application in Azure DevOps
 https://www.youtube.com/watch?v=GhPi3xBhzrI&t=676s
@@ -105,13 +105,58 @@ https://www.youtube.com/watch?v=KceoqTcf4Lk&list=PLNNeqe21-U0PJGMvVuG8XKEZSrr8aJ
 
 1) Using ARM TEMPLATES In AZURE DEVOPS PIPELINE To Automatically CREATE INFRASTRUCTURE As CODE
 https://www.youtube.com/watch?v=ZsUxn7fpzYQ&list=PLNNeqe21-U0PJGMvVuG8XKEZSrr8aJiz7&index=6
-https://www.youtube.com/watch?v=3IRwtbGlshk
 
 
 ***************************************** DOCKER & CONTAINERS *******************************************
 
 1) Dockerize your Angular app - Docker /Angular 13 / Nginx
 https://www.youtube.com/watch?v=3NobJzI3_68
+
+Dockerfile for Angular 
+======================
+FROM node:latest as build
+COPY . /app
+WORKDIR /app
+RUN npm install
+RUN npm run build
+
+FROM nginx:latest
+COPY --from=build /app/dist/sample-angular-app /usr/share/nginx/html
+EXPOSE 80
+
+Dockerfile for Node.js 
+======================
+FROM node:16
+WORKDIR /usr/src/app
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+CMD [ "node", "server.js" ]
+
+Dockerfile for Asp.net 
+======================
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /app
+
+# Copy csproj and restore as distinct layers
+COPY SampleWebApp/*.csproj .
+RUN dotnet restore
+
+# Copy everything else and build website
+COPY SampleWebApp/. .
+RUN dotnet publish -c release -o /WebApp --no-restore
+
+# Final stage / image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+WORKDIR /WebApp
+COPY --from=build /WebApp ./
+ENTRYPOINT ["dotnet", "SampleWebApp.dll"]
+
+
 
 2) Dockerizing a React application with Nodejs Postgres and NginX | dev and prod | step by step
 https://www.youtube.com/watch?v=-pTel5FojAQ
@@ -154,9 +199,6 @@ DOCKER COMMANDS:-
 sudo docker build -t dotnetapp .
 sudo docker run -d -p 5000:5000 dotnetapp
 
-Follow us @devopsmela on Instagram
-Write us devopsmela@gmail.com
-
 =================
 ACR asp.net STEPS
 =================
@@ -194,7 +236,11 @@ VVC:\Users\lvchi\source\repos\PC_FIRST\PC_FIRST.sln
 1) Kubernetes Multi Container Deployment | React | Node.js | Postgres | Ingress Nginx | step by step
 https://www.youtube.com/watch?v=OVVGwc90guo
 
+2) ASP.NET Web application deployment on Azure Kubernetes Services through Azure DevOps CI/CD | AKS
+https://www.youtube.com/watch?v=HmajgZEyYa8&t=14s
 
+How to create AKS Cluster | Setting Up & Deploying an Azure Kubernetes Service Cluster | K21Academy
+https://www.youtube.com/watch?v=NnwQZyi0BAs
 
 ********************************************** POWERSHELL **************************************************
 
@@ -286,7 +332,11 @@ https://www.youtube.com/watch?v=8iyockDkIY4V
 
 Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. This state is stored by default in a local file named "terraform.
 
-****************************************** NEXT **************************************************
+**************************************************** NEXT ****************************************************
 
 1) Planning and implementing Disaster Recovery solutions, capacity planning, data archiving, backup/recovery strategies, Performance Analysis and optimization.
 2) scenario based interview questions?
+3) Docker | How to Dockerize a Django application (Beginners Guide)
+https://www.youtube.com/watch?v=W5Ov0H7E_o4
+4) Complete AWS DevOps Series with Practical's within 1.5 hrs. #AWS #AWSDevOps
+https://www.youtube.com/watch?v=3cg5yq7MdnQ
