@@ -154,7 +154,7 @@ RUN dotnet publish -c release -o /WebApp --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /WebApp
 COPY --from=build /WebApp ./
-ENTRYPOINT ["dotnet", "SampleWebApp.dll"]
+ENTRYPOINT ["dotnet", "SampleWebApp.dll"]t
 
 
 
@@ -199,27 +199,24 @@ DOCKER COMMANDS:-
 sudo docker build -t dotnetapp .
 sudo docker run -d -p 5000:5000 dotnetapp
 
-=================
-ACR asp.net STEPS
-=================
-List of steps followed in the above tutorial:
+===========================
+PUSHING DOCKER IMAGE TO ACR
+===========================
+List of steps followed:
 - Azure Container Registry creation 
 - Azure CLI set-up on Ubuntu Server 
 - Pushing ASP.NET Core Web App on Azure Registry
 
-Azure CLI Commands:-
-https://gitlab.com/rohit.kumar.singh0...
+#Install the Azure command line interface in Ubuntu:-
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-Azure Login:-
+#Azure Login:-
 sudo az login
 sudo az acr login --name devopsmela
 
-Push Commands:-
+#Push Commands:-
 sudo docker tag dotnetapp devopsmela.azurecr.io/dotnetapp
 sudo docker push devopsmela.azurecr.io/dotnetapp
-
-Follow @devopsmela on Instagram for daily updates 
-Write us at devopsmela@gmail.com
 
 ==================
 ACI asp.net STEPS:
@@ -227,6 +224,9 @@ ACI asp.net STEPS:
 ASP.NET Core Web Application Deployment on Azure Container Instance 
 -  Fetching ASP.NET Image from Azure Container Registry
 - Deploying and Testing the Web Application 
+
+
+Portal -> Create new ACI and select image from ACR/Docker and mention the application port.
 
 VVC:\Users\lvchi\source\repos\PC_FIRST\PC_FIRST.sln
 
@@ -331,6 +331,8 @@ https://www.youtube.com/watch?v=8iyockDkIY4V
 2) Terraform is an open-source infrastructure as code software tool created by HashiCorp. Users define and provide data center infrastructure using a declarative configuration language known as HashiCorp Configuration Language, or optionally JSON.
 
 Terraform must store state about your managed infrastructure and configuration. This state is used by Terraform to map real world resources to your configuration, keep track of metadata, and to improve performance for large infrastructures. This state is stored by default in a local file named "terraform.
+
+
 
 **************************************************** NEXT ****************************************************
 
